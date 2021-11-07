@@ -97,8 +97,7 @@ function sendTransaction(isAdding) {
   if (nameEl.value === "" || amountEl.value === "") {
     errorEl.textContent = "Missing Information";
     return;
-  }
-  else {
+  } else {
     errorEl.textContent = "";
   }
 
@@ -146,7 +145,9 @@ function sendTransaction(isAdding) {
     })
     .catch(err => {
       // fetch failed, so save in indexed db
+
       saveRecord(transaction);
+      console.log('save record');
 
       // clear form
       nameEl.value = "";
@@ -154,10 +155,12 @@ function sendTransaction(isAdding) {
     });
 }
 
-document.querySelector("#add-btn").onclick = function () {
+document.querySelector('#add-btn').addEventListener('click', function (event) {
+  event.preventDefault();
   sendTransaction(true);
-};
+});
 
-document.querySelector("#sub-btn").onclick = function () {
+document.querySelector('#sub-btn').addEventListener('click', function (event) {
+  event.preventDefault();
   sendTransaction(false);
-};
+});
