@@ -1,15 +1,5 @@
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", function () {
-    navigator.serviceWorker
-      .register("/serviceWorker.js")
-      .then(res => console.log("service worker registered"))
-      .catch(err => console.log("service worker not registered", err))
-  })
-}
-
 let transactions = [];
 let myChart;
-
 
 fetch("/api/transaction")
   .then(response => {
@@ -154,13 +144,10 @@ function sendTransaction(isAdding) {
       amountEl.value = "";
     });
 }
-
-document.querySelector('#add-btn').addEventListener('click', function (event) {
-  event.preventDefault();
+document.querySelector("#add-btn").onclick = function() {
   sendTransaction(true);
-});
+};
 
-document.querySelector('#sub-btn').addEventListener('click', function (event) {
-  event.preventDefault();
+document.querySelector("#sub-btn").onclick = function() {
   sendTransaction(false);
-});
+};
